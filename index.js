@@ -1,6 +1,7 @@
 // Import stylesheets
 import "./style.css";
 import * as BABYLON from "babylonjs";
+import "babylonjs-loaders";
 
 var createScene = function() {
   var scene = new BABYLON.Scene(engine);
@@ -31,6 +32,15 @@ const ground = BABYLON.MeshBuilder.CreateGround("ground", {
   width: 10,
   height: 10
 });
+
+const importObj = function() {
+  // BABYLON.OBJFileLoader.OPTIMIZE_WITH_UV = true;
+  BABYLON.SceneLoader.Append("/assets/", "chr_sword.obj", scene, scene => {
+    console.log("Mesh Loaded");
+  });
+};
+
+importObj();
 // Register a render loop to repeatedly render the scene
 engine.runRenderLoop(function() {
   scene.render();
